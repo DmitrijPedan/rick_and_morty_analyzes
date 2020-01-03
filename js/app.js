@@ -2,8 +2,6 @@
 
 const url = 'https://rickandmortyapi.com/api/character';
 
-let data = JSON.parse(localStorage.getItem("charKey"));
-
 const getData = function() {
 axios
     .get(url)
@@ -22,55 +20,60 @@ axios
     .catch(error => console.log('Error in main Promise', error));
 };
 
-//============================================================================================
-
-// function newFunc () {
-//     console.log(document.getElementById("gender-input").value)
-// }
-// document.getElementById("get-input").onclick = newFunc;
-
-
 //==========  Local Storage ==========
 
 const deleteFromLs = () => {
     localStorage.removeItem("charKey");
 };
 
-const getDataFromLS = function () {
-    if (localStorage.getItem("charKey")) {
-        data = JSON.parse(localStorage.getItem("charKey"));
-      }
-    console.log(data);
-}
-
 document.getElementById("write-ls").onclick = getData;
-document.getElementById("write-data").onclick = getDataFromLS;
 document.getElementById("delete-ls").onclick = deleteFromLs;
  
 //==========  Analyzes ==========
 
- const getCharactersInfo = () => {
-    const names = data.map(el => `ID: ${el.id}, Имя: ${el.name}, вид: ${el.species}, пол: ${el.gender}, статус: ${el.status}`);
-    console.log(names);
+//  const getCharactersInfo = () => {
+//     const names = data.map(el => `id: ${el.id}, Имя: ${el.name}, вид: ${el.species}, пол: ${el.gender}, статус: ${el.status}. <br> `);
+//     document.getElementById("output").innerHTML = names;
+// };
+
+function sortData () {
+    let data = {};
+    localStorage.getItem("charKey") ? data = JSON.parse(localStorage.getItem("charKey")) : alert('В localStorage нет данных. Загрузите данные.');
+   
+
+
+    let gend = document.getElementById("selGender").value;
+    let stat = document.getElementById("selStatus").value;
+    let spec = document.getElementById("selSpecies").value;
+    
+    
+    
+    
+    
+    
+    console.log(gend, typeof(gend));
+    console.log(stat, typeof(stat));
+    console.log(spec, typeof(spec));
+}
+
+
+document.getElementById("sort-run").onclick = sortData;
+
+
+const getGenderCharacters = (characters) => {
+    const genders = {1: "Male", 2: "Female", 3: "Genderless", 4: "unknown"};
+    const result = characters
+        .filter(el => el.gender === (genders[2]))
+        .map(el => `ID: ${el.id}, Имя: ${el.name}, вид: ${el.species}, статус: ${el.status}`);
+    console.log(result);
 };
-console.log(data);
-getCharactersInfo();
 
-
-// const getGenderCharacters = (characters) => {
-//     const genders = {1: "Male", 2: "Female", 3: "Genderless", 4: "unknown"};
-//     const result = characters
-//         .filter(el => el.gender === (genders[2]))
-//         .map(el => `ID: ${el.id}, Имя: ${el.name}, вид: ${el.species}, статус: ${el.status}`);
-//     console.log(result);
-// };
-
-// const getHumansCharacters = (characters) => {
-//     const genders = {1: "Male", 2: "Female", 3: "Genderless", 4: "unknown"};
-//     const result = characters
-//         .filter(el => el.gender === (genders[2]))
-//         .map(el => `ID: ${el.id}, Имя: ${el.name}, вид: ${el.species}, пол: ${el.gender}, статус: ${el.status}`);
-//     console.log(result);
-// };
+const getHumansCharacters = (characters) => {
+    const genders = {1: "Male", 2: "Female", 3: "Genderless", 4: "unknown"};
+    const result = characters
+        .filter(el => el.gender === (genders[2]))
+        .map(el => `ID: ${el.id}, Имя: ${el.name}, вид: ${el.species}, пол: ${el.gender}, статус: ${el.status}`);
+    console.log(result);
+};
 
 

@@ -5,16 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Rick and Morty info</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="header">
-        <label for="gender-input">Gender</label>
-        <input type="text" id="gender-input">
-        <button id="get-input">Run</button>
+        <div class="container">
+        <div class="descript">
+            <h2>Работа с данными:</h2>
+        </div> 
+            <div class="localStorage">          
+            <button id="write-ls">Получить данные с сервера <br> и сохранить в local Storage</button>
+            <button id="delete-ls">Удалить полученные данные <br> из local Storage</button>
+        </div>
+        <div class="descript">
+            <h2>Сортировка:</h2>
+        </div> 
+        <div class="sort">
+            <label for="selGender">Пол:</label>
+            <select name="" id="selGender">
+                <option value="">Не указано</option>
+                <option value="Male">Мужской</option>
+                <option value="Female">Женский</option>
+                <option value="Genderless">Без пола</option>
+                <option value="Unknown">Неизвесно</option>
+            </select>
 
-        <button id="write-ls">Get and write to Local Storage</button>
-        <button id="write-data">Write to Data from Local Storage</button>
-        <button id="delete-ls">Delete from Local Storage</button>
+            <label for="selStatus">Статус:</label>
+            <select name="" id="selStatus">
+                <option value="">Не указано</option>
+                <option value="Alive">Живой</option>
+                <option value="Dead">Мертвый</option>
+                <option value="Unknown">Неизвесно</option>
+            </select>
+
+            <label for="selSpecies">Вид:</label>
+            <select name="" id="selSpecies">
+                <option value="">Не указано</option>
+                <option value="Human">Human</option>
+                <option value="Alien">Alien</option>
+                <option value="Humanoid">Humanoid</option>
+                <option value="Poopybutthole">Poopybutthole</option>
+                <option value="Mytholog">Mytholog</option>
+                <option value="Animal">Animal</option>
+                <option value="Vampire">Vampire</option>
+                <option value="Robot">Robot</option>
+                <option value="Gronenberg">Gronenberg</option>
+                <option value="Dicease">Dicease</option>
+                <option value="Parasite">Parasite</option>
+                <option value="Unknown">Unknown</option>
+            </select>
+
+
+            <br>
+            <br>
+             <button id="sort-run">Выполнить</button>  
+        </div>
+        
+    </div>
+    </div>
+    <div class="data" id="output">
+
     </div>
 
 
