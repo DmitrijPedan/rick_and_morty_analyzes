@@ -1,4 +1,4 @@
-/*==================== Rick and Morty analyzes ==========================*/
+//==========  Get Data (axios) ==========
 
 const url = 'https://rickandmortyapi.com/api/character';
 
@@ -21,16 +21,11 @@ axios
 };
 
 //==========  Local Storage ==========
-
-const deleteFromLs = () => {
-    localStorage.removeItem("charKey");
-};
-
+const deleteFromLs = () => localStorage.removeItem("charKey");
 document.getElementById("write-ls").onclick = getData;
 document.getElementById("delete-ls").onclick = deleteFromLs;
  
-//==========  Analyzes ==========
-
+//==========  Sorting ==========
 function sortData () {
     let data = {};
     if (localStorage.getItem("charKey")) {
@@ -42,16 +37,14 @@ function sortData () {
     let gend = document.getElementById("selGender").value;
     let stat = document.getElementById("selStatus").value;
     let spec = document.getElementById("selSpecies").value;
-    sortByGender(data, gend,stat,spec);
-   
-    
-    console.log(gend.length, typeof(gend));
-    // console.log(stat, typeof(stat));
-    // console.log(spec, typeof(spec));
-    // console.log(data);
+    let result = sortByCategory(data, gend, stat, spec);
+
+
+    console.log(result);
+    console.log(data);
 }
 
-function sortByGender (obj, key1, key2, key3) {
+function sortByCategory (obj, key1, key2, key3) {
     let result = obj;
         switch (true) {
             case (key1.length > 0 && key2.length == 0 && key3.length == 0):
@@ -76,12 +69,15 @@ function sortByGender (obj, key1, key2, key3) {
                 result = obj.filter(el => (el.gender == key1 && el.status == key2 && el.species == key3));
                 break;
         }
-    // return result.map(el => `id: ${el.id}, Имя: ${el.name}, пол: ${el.gender}, вид: ${el.species}, статус: ${el.status}`);
-    console.log(result.map(el => `id: ${el.id}, Имя: ${el.name}, пол: ${el.gender}, вид: ${el.species}, статус: ${el.status}`));
+    return result.map(el => `id: ${el.id}, Имя: ${el.name}, пол: ${el.gender}, вид: ${el.species}, статус: ${el.status}`);
 };
-
 
 document.getElementById("sort-run").onclick = sortData;
 
+//==========  Output data ==========
+function outputDataToList () {
+    let div = document.createElement('div');
+}
+outputDataToList ()
 
 

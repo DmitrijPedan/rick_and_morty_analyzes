@@ -10,61 +10,82 @@
 <body>
     <div class="header">
         <div class="container">
-        <div class="descript">
-            <h2>Работа с данными:</h2>
-        </div> 
+            <div class="descript">
+                <h2>Работа с данными:</h2>
+            </div> 
             <div class="localStorage">          
-            <button id="write-ls">Получить данные с сервера <br> и сохранить в local Storage</button>
-            <button id="delete-ls">Удалить полученные данные <br> из local Storage</button>
+                <button id="write-ls">Получить данные с сервера <br> и сохранить в local Storage</button>
+                <button id="delete-ls">Удалить полученные данные <br> из local Storage</button>
+            </div>
+            <div class="descript">
+                <h2>Сортировка:</h2>
+            </div> 
+            <div class="sort">
+                <label for="selGender">Пол:</label>
+                    <select name="" id="selGender">
+                        <option value="">Не указано</option>
+                        <option value="Male">Мужской</option>
+                        <option value="Female">Женский</option>
+                        <option value="Genderless">Без пола</option>
+                        <option value="unknown">Неизвесно</option>
+                    </select>
+                <label for="selStatus">Статус:</label>
+                    <select name="" id="selStatus">
+                        <option value="">Не указано</option>
+                        <option value="Alive">Живой</option>
+                        <option value="Dead">Мертвый</option>
+                        <option value="unknown">Неизвесно</option>
+                    </select>
+                <label for="selSpecies">Вид:</label>
+                    <select name="" id="selSpecies">
+                        <option value="">Не указано</option>
+                        <option value="Human">Human</option>
+                        <option value="Alien">Alien</option>
+                        <option value="Humanoid">Humanoid</option>
+                        <option value="Poopybutthole">Poopybutthole</option>
+                        <option value="Mytholog">Mytholog</option>
+                        <option value="Animal">Animal</option>
+                        <option value="Vampire">Vampire</option>
+                        <option value="Robot">Robot</option>
+                        <option value="Gronenberg">Gronenberg</option>
+                        <option value="Dicease">Dicease</option>
+                        <option value="Parasite">Parasite</option>
+                        <option value="unknown">Unknown</option>
+                    </select>
+                <br>
+                <button id="sort-run">Выполнить</button>  
+            </div>
         </div>
-        <div class="descript">
-            <h2>Сортировка:</h2>
-        </div> 
-        <div class="sort">
-            <label for="selGender">Пол:</label>
-            <select name="" id="selGender">
-                <option value="">Не указано</option>
-                <option value="Male">Мужской</option>
-                <option value="Female">Женский</option>
-                <option value="Genderless">Без пола</option>
-                <option value="unknown">Неизвесно</option>
-            </select>
-
-            <label for="selStatus">Статус:</label>
-            <select name="" id="selStatus">
-                <option value="">Не указано</option>
-                <option value="Alive">Живой</option>
-                <option value="Dead">Мертвый</option>
-                <option value="unknown">Неизвесно</option>
-            </select>
-
-            <label for="selSpecies">Вид:</label>
-            <select name="" id="selSpecies">
-                <option value="">Не указано</option>
-                <option value="Human">Human</option>
-                <option value="Alien">Alien</option>
-                <option value="Humanoid">Humanoid</option>
-                <option value="Poopybutthole">Poopybutthole</option>
-                <option value="Mytholog">Mytholog</option>
-                <option value="Animal">Animal</option>
-                <option value="Vampire">Vampire</option>
-                <option value="Robot">Robot</option>
-                <option value="Gronenberg">Gronenberg</option>
-                <option value="Dicease">Dicease</option>
-                <option value="Parasite">Parasite</option>
-                <option value="unknown">Unknown</option>
-            </select>
-
-
-            <br>
-            <br>
-             <button id="sort-run">Выполнить</button>  
-        </div>
-        
-    </div>
     </div>
     <div class="data" id="output">
-
+        <div class="container">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <!-- <div class="card">
+                <div class="image">
+                    <img src="img/1.jpeg" alt="">
+                </div>
+                <div class="description">
+                    <h3>Name</h3>
+                    <p>
+                        <span>Gender</span>
+                        <span>Status</span>
+                        <span>Species</span>
+                        <span>Type</span> <br>
+                        <span>Episode</span>
+                    </p>
+                </div>
+            </div> -->
+        </div>
     </div>
 
 
