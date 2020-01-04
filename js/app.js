@@ -31,49 +31,57 @@ document.getElementById("delete-ls").onclick = deleteFromLs;
  
 //==========  Analyzes ==========
 
-//  const getCharactersInfo = () => {
-//     const names = data.map(el => `id: ${el.id}, Имя: ${el.name}, вид: ${el.species}, пол: ${el.gender}, статус: ${el.status}. <br> `);
-//     document.getElementById("output").innerHTML = names;
-// };
-
 function sortData () {
     let data = {};
-    localStorage.getItem("charKey") ? data = JSON.parse(localStorage.getItem("charKey")) : alert('В localStorage нет данных. Загрузите данные.');
-   
-
-
+    if (localStorage.getItem("charKey")) {
+        data = JSON.parse(localStorage.getItem("charKey"));
+    } else {
+        alert('В localStorage нет данных. Загрузите данные.');
+        return;
+    }
     let gend = document.getElementById("selGender").value;
     let stat = document.getElementById("selStatus").value;
     let spec = document.getElementById("selSpecies").value;
+    sortByGender(data, gend,stat,spec);
+   
     
-    
-    
-    
-    
-    
-    console.log(gend, typeof(gend));
-    console.log(stat, typeof(stat));
-    console.log(spec, typeof(spec));
+    console.log(gend.length, typeof(gend));
+    // console.log(stat, typeof(stat));
+    // console.log(spec, typeof(spec));
+    // console.log(data);
 }
+
+function sortByGender (obj, key1, key2, key3) {
+    let result = obj;
+        switch (true) {
+            case (key1.length > 0 && key2.length == 0 && key3.length == 0):
+                result = obj.filter(el => el.gender == key1);
+                break;
+            case (key1.length == 0 && key2.length > 0 && key3.length == 0):
+                result = obj.filter(el => el.status == key2);
+                break;
+            case (key1.length == 0 && key2.length == 0 && key3.length > 0):
+                result = obj.filter(el => el.species == key3);
+                break;
+            case (key1.length > 0 && key2.length > 0 && key3.length == 0):
+                result = obj.filter(el => (el.gender == key1 && el.status == key2));
+                break;
+            case (key1.length > 0 && key2.length == 0 && key3.length > 0):
+                result = obj.filter(el => (el.gender == key1 && el.species == key3));
+                break;
+            case (key1.length == 0 && key2.length > 0 && key3.length > 0):
+                result = obj.filter(el => (el.status == key2 && el.species == key3));
+                break;
+            case (key1.length > 0 && key2.length > 0 && key3.length > 0):
+                result = obj.filter(el => (el.gender == key1 && el.status == key2 && el.species == key3));
+                break;
+        }
+    // return result.map(el => `id: ${el.id}, Имя: ${el.name}, пол: ${el.gender}, вид: ${el.species}, статус: ${el.status}`);
+    console.log(result.map(el => `id: ${el.id}, Имя: ${el.name}, пол: ${el.gender}, вид: ${el.species}, статус: ${el.status}`));
+};
 
 
 document.getElementById("sort-run").onclick = sortData;
 
-
-const getGenderCharacters = (characters) => {
-    const genders = {1: "Male", 2: "Female", 3: "Genderless", 4: "unknown"};
-    const result = characters
-        .filter(el => el.gender === (genders[2]))
-        .map(el => `ID: ${el.id}, Имя: ${el.name}, вид: ${el.species}, статус: ${el.status}`);
-    console.log(result);
-};
-
-const getHumansCharacters = (characters) => {
-    const genders = {1: "Male", 2: "Female", 3: "Genderless", 4: "unknown"};
-    const result = characters
-        .filter(el => el.gender === (genders[2]))
-        .map(el => `ID: ${el.id}, Имя: ${el.name}, вид: ${el.species}, пол: ${el.gender}, статус: ${el.status}`);
-    console.log(result);
-};
 
 
