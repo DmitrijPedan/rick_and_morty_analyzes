@@ -30,11 +30,20 @@ h2 {
     border: 1px solid gray;
     text-align: center;
 }
-.sort > select {
+.sel {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.sel > div {
+    margin: 10px;
+}
+.sel > div > select {
     margin: 15px;
 }
-.sort > button {
+.sort-btn > button {
     margin: 10px;
+    padding: 5px;
 }
 .card {
     margin: 10px;
@@ -51,6 +60,14 @@ h2 {
     height: 100%;
 }
 
+@media (min-width: 300px) and (max-width: 449px) {
+    .sel > div {
+        margin: 10px;
+    }
+    .sel > div > select {
+        margin: 0px;
+    }
+}
 
 
 
