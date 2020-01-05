@@ -2,7 +2,7 @@
 
 const url = 'https://rickandmortyapi.com/api/character';
 
-const getData = function() {
+function getData () {
 axios
     .get(url)
     .then(response => {
@@ -20,23 +20,16 @@ axios
     .catch(error => console.log('Error in main Promise', error));
 };
 
-const deleteFromLs = () => localStorage.removeItem("charKey");
- 
-function sortData () {
-    let data = {};
-    if (localStorage.getItem("charKey")) {
-        data = JSON.parse(localStorage.getItem("charKey"));
-    } else {
-        alert('В localStorage нет данных. Загрузите данные.');
-        return;
-    }
-    let gend = document.getElementById("selGender").value;
-    let stat = document.getElementById("selStatus").value;
-    let spec = document.getElementById("selSpecies").value;
-    let sortedArray = sortByCategory(data, gend, stat, spec);
-    outputDataToList(sortedArray);
+function deleteFromLs () {
+    localStorage.getItem("charKey") ? localStorage.removeItem("charKey") : console.log('no data');
 }
 
+function getDataFromLs () {
+    let data = {};
+    localStorage.getItem("charKey") ? data = JSON.parse(localStorage.getItem("charKey")) : alert('В localStorage нет данных. Загрузите данные.');
+    return data;
+}
+ 
 function sortByCategory (obj, key1, key2, key3) {
     let result = obj;
         switch (true) {
@@ -81,12 +74,20 @@ function outputDataToList (arr) {
     ol.append(...result); 
 };
 
+function sortData () {
+    let inpData = getDataFromLs ();
+    let gend = document.getElementById("selGender").value;
+    let stat = document.getElementById("selStatus").value;
+    let spec = document.getElementById("selSpecies").value;
+    let sortedArray = sortByCategory(inpData, gend, stat, spec);
+    outputDataToList(sortedArray);
+}
+
 function deleteOlList () {
     if (document.getElementById("resultList")) {
         document.getElementById("resultList").remove();
     } return;
 };
-
 
 document.getElementById("write-ls").onclick = getData;
 document.getElementById("delete-ls").onclick = deleteFromLs;
