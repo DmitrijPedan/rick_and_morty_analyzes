@@ -20,12 +20,8 @@ axios
     .catch(error => console.log('Error in main Promise', error));
 };
 
-//==========  Local Storage ==========
 const deleteFromLs = () => localStorage.removeItem("charKey");
-document.getElementById("write-ls").onclick = getData;
-document.getElementById("delete-ls").onclick = deleteFromLs;
  
-//==========  Sorting ==========
 function sortData () {
     let data = {};
     if (localStorage.getItem("charKey")) {
@@ -37,11 +33,8 @@ function sortData () {
     let gend = document.getElementById("selGender").value;
     let stat = document.getElementById("selStatus").value;
     let spec = document.getElementById("selSpecies").value;
-    let result = sortByCategory(data, gend, stat, spec);
-
-
-    console.log(result);
-    console.log(data);
+    let sortedArray = sortByCategory(data, gend, stat, spec);
+    outputDataToList(sortedArray);
 }
 
 function sortByCategory (obj, key1, key2, key3) {
@@ -69,15 +62,35 @@ function sortByCategory (obj, key1, key2, key3) {
                 result = obj.filter(el => (el.gender == key1 && el.status == key2 && el.species == key3));
                 break;
         }
-    return result.map(el => `id: ${el.id}, Имя: ${el.name}, пол: ${el.gender}, вид: ${el.species}, статус: ${el.status}`);
+        console.log(result);
+    return result;
 };
 
-document.getElementById("sort-run").onclick = sortData;
+function outputDataToList (arr) {
+    let ol = document.createElement('ol');
+    ol.className = "ol-result-list";
+    ol.id = "resultList"
+    let result = [];
+    for (let i = 0; i < arr.length; i++) {
+        let li = document.createElement('li');
+        li.append(`${arr[i].name} --- происхождение: ${arr[i].origin.name}`);
+        result.push(li);
+    }
+    output.prepend(ol);
+    ol.append(`Найдено: ${arr.length}`);
+    ol.append(...result); 
+};
 
-//==========  Output data ==========
-function outputDataToList () {
-    let div = document.createElement('div');
-}
-outputDataToList ()
+function deleteOlList () {
+    if (document.getElementById("resultList")) {
+        document.getElementById("resultList").remove();
+    } return;
+};
+
+
+document.getElementById("write-ls").onclick = getData;
+document.getElementById("delete-ls").onclick = deleteFromLs;
+document.getElementById("sort-run").onclick = sortData;
+document.getElementById("clear-result").onclick = deleteOlList;
 
 
