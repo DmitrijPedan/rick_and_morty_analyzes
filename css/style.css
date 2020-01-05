@@ -37,9 +37,12 @@ h2 {
 }
 .sel > div {
     margin: 10px;
+    width: 180px;
+    text-align: right;
 }
 .sel > div > select {
-    margin: 15px;
+    margin: 10px;
+    width: 100px;
 }
 .sort-btn > button {
     margin: 10px;
