@@ -86,6 +86,7 @@ function sortData () {
 function deleteOlList () {
     if (document.getElementById("resultList")) {
         document.getElementById("resultList").remove();
+        location.reload();
     } return;
 };
 
