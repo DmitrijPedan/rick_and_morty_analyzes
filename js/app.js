@@ -29,7 +29,12 @@ function getDataFromLs () {
     localStorage.getItem("charKey") ? data = JSON.parse(localStorage.getItem("charKey")) : alert('В localStorage нет данных. Загрузите данные.');
     return data;
 }
+
+document.getElementById("write-ls").onclick = getData;
+document.getElementById("delete-ls").onclick = deleteFromLs;
  
+// sorting =======================
+
 function sortByCategory (obj, key1, key2, key3) {
     let result = obj;
         switch (true) {
@@ -59,40 +64,47 @@ function sortByCategory (obj, key1, key2, key3) {
     return result;
 };
 
-function outputDataToList (arr) {
-    let ol = document.createElement('ol');
-    ol.className = "ol-result-list";
-    ol.id = "resultList"
-    let result = [];
-    for (let i = 0; i < arr.length; i++) {
-        let li = document.createElement('li');
-        li.append(`${arr[i].name} --- происхождение: ${arr[i].origin.name}`);
-        result.push(li);
-    }
-    output.prepend(ol);
-    ol.append(`Найдено: ${arr.length}`);
-    ol.append(...result); 
-};
+function createHTMLNode (tag, attrs, content) {
+    let el = document.createElement(tag);
+    attrs.map(attr => {el.setAttribute(attr.name, attr.value.join(' '))});
+    content?el.innerHTML=content:null;
+    return el;
+}
 
-function sortData () {
+// <div class="col output-div" >
+
+function outputCards (dataObject) {
+    document.getElementById('results-col') ? document.getElementById ('results-col').remove() : null;
+    const resWrapper = createHTMLNode ('div', [{name: 'class', value: ['col resWrapper']}, {name: 'id', value: ['results-col']}], null);
+    const res = createHTMLNode ('h4', [{name: 'class', value: ['text-primary']}], `Найдено результатов: ${dataObject.length}`);
+    resWrapper.appendChild(res);
+    document.getElementById('results').appendChild(resWrapper);
+    document.getElementById('card-col') ? document.getElementById ('card-col').remove() : null;
+    const col = createHTMLNode ('div', [{name: 'class', value: ['col output-div']}, {name: 'id', value: ['card-col']}], null);
+    dataObject.map(el => {
+        const title = createHTMLNode ('h5', [{name: 'class', value: ['card-title']}], `Name: ${el.name}`);
+        const text = createHTMLNode ('p', [{name: 'class', value: ['card-text']}], `Origin: ${el.origin.name}`);
+        const body = createHTMLNode ('div', [{name: 'class', value: ['card-body']}], null);
+        const image = createHTMLNode ('img', [{name: 'class', value: ['card-img-top']}, {name: 'src', value: [`${el.image}`]}], null);
+        const card = createHTMLNode ('div', [{name: 'class', value: ['card']}, {name: 'id', value: ['datacard']}], null);
+        body.appendChild(title);
+        body.appendChild(text);
+        card.appendChild(image);
+        card.appendChild(body);
+        col.appendChild(card);
+        document.getElementById('output').appendChild(col);
+})}
+
+function getResults () {
     let inpData = getDataFromLs ();
     let gend = document.getElementById("selGender").value;
     let stat = document.getElementById("selStatus").value;
     let spec = document.getElementById("selSpecies").value;
     let sortedArray = sortByCategory(inpData, gend, stat, spec);
-    outputDataToList(sortedArray);
+    outputCards(sortedArray);
+    document.getElementById ('selGender').value = "";
+    document.getElementById ('selStatus').value = "";
+    document.getElementById ('selSpecies').value = "";  
 }
 
-function deleteOlList () {
-    if (document.getElementById("resultList")) {
-        document.getElementById("resultList").remove();
-        location.reload();
-    } return;
-};
-
-document.getElementById("write-ls").onclick = getData;
-document.getElementById("delete-ls").onclick = deleteFromLs;
-document.getElementById("sort-run").onclick = sortData;
-document.getElementById("clear-result").onclick = deleteOlList;
-
-
+document.getElementById("sort-run").onclick = getResults;

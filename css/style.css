@@ -17,3 +17,32 @@
     margin: 0px 20px;
 }
 
+.output-div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    margin: 20px;
+    width: 300px;
+    max-height: 398px;
+}
+
+.card img {
+    max-width: 300px;
+    max-height: 300px;
+}
+
+.card-body p {
+    max-width: 250px;
+}
+.card-body h5 {
+    max-width: 250px;
+}
+
+.resWrapper {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+}
