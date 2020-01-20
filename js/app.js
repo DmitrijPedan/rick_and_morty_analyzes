@@ -20,6 +20,8 @@ axios
     .catch(error => console.log('Error in main Promise', error));
 };
 
+getData ();
+
 function deleteFromLs () {
     localStorage.getItem("charKey") ? localStorage.removeItem("charKey") : console.log('no data');
 }
@@ -32,7 +34,6 @@ function getDataFromLs () {
 
 document.getElementById("write-ls").onclick = getData;
 document.getElementById("delete-ls").onclick = deleteFromLs;
- 
 // sorting =======================
 
 function sortByCategory (obj, key1, key2, key3) {
@@ -70,8 +71,6 @@ function createHTMLNode (tag, attrs, content) {
     content?el.innerHTML=content:null;
     return el;
 }
-
-// <div class="col output-div" >
 
 function outputCards (dataObject) {
     document.getElementById('results-col') ? document.getElementById ('results-col').remove() : null;
